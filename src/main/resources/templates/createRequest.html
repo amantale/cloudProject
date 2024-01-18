@@ -1,0 +1,82 @@
+<!--createRequest.html-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Generate PDF from Form Data</title>
+    <!-- Change the script source to use HTTP -->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<h1>Create a new request</h1>
+
+<form th:action="@{/submit}" method="post" onsubmit="return generateFormData(event)">
+    <label for="firstName">First Name:</label><br>
+    <input type="text" id="firstName" name="firstName" th:field="*{formData.firstName}"><br>
+
+    <label for="lastName">Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName" th:field="*{formData.lastName}"><br>
+
+    <label for="selectedDate">Select Date:</label><br>
+    <input type="date" id="selectedDate" name="selectedDate" th:field="*{formData.selectedDate}"><br>
+
+    <label for="reason">Reason:</label><br>
+    <textarea id="reason" name="reason" th:field="*{formData.reason}"></textarea><br><br>
+
+    <input type="submit" value="Generate Form Data">
+</form>
+
+<div id="messageDiv" style="display: none; color: green; margin-top: 10px;"></div>
+
+<script>
+    function generateFormData(event) {
+        event.preventDefault();
+
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var selectedDate = $("#selectedDate").val();
+        var reason = $("#reason").val();
+
+        if (!firstName || !lastName || !selectedDate || !reason) {
+            console.error("One or more form fields are empty. Please fill in all the fields.");
+            return false;
+        }
+
+        $("#messageDiv").text("Your form data was submitted successfully.");
+        $("#messageDiv").show();
+
+        console.log("Form data submitted:", {
+            firstName: firstName,
+            lastName: lastName,
+            selectedDate: selectedDate,
+            reason: reason
+        });
+
+        $.ajax({
+            type: "POST",
+            // Use HTTP for the URL
+            // url: "https://frontend.mantalepersonal.com/submit",
+            url: "http://localhost:8080/submit",
+            data: {
+                firstName: firstName,
+                lastName: lastName,
+                selectedDate: selectedDate,
+                reason: reason
+            },
+            success: function(response) {
+                console.log("Form data submitted successfully:", response);
+                // Handle any further actions or update the UI as needed
+            },
+            error: function(error) {
+                console.error("Error submitting form data:", error);
+                // Handle errors or update the UI accordingly
+            }
+        });
+
+        // Return false to prevent the form from submitting via traditional HTML form submission
+        return false;
+    }
+</script>
+
+</body>
+</html>
