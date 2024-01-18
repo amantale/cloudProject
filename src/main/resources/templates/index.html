@@ -3,76 +3,79 @@
 <head>
     <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Generate PDF from Form Data</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
-    <script>
-        function generatePDF() {
-            var firstName = $("#firstName").val();
-            var lastName = $("#lastName").val();
-            var selectedDate = $("#selectedDate").val();
-            var reason = $("#reason").val();
-
-            if (!firstName || !lastName || !selectedDate || !reason) {
-                console.error("One or more form fields are empty. Please fill in all the fields.");
-                return;
-            }
-
-            var doc = new jsPDF();
-
-            // Add form data to the PDF
-            doc.text(20, 20, 'First Name: ' + firstName);
-            doc.text(20, 30, 'Last Name: ' + lastName);
-            doc.text(20, 40, 'Selected Date: ' + selectedDate);
-            doc.text(20, 50, 'Reason: ' + reason);
-
-            // Save the PDF document
-            doc.save("form-data.pdf");
-
-            // Get the base64 data URL of the PDF
-            var pdfData = doc.output('datauristring');
-
-            // Send the PDF data to the API via an AJAX POST request
-            $.ajax({
-                type: 'POST',
-                url: '/submit', // Assuming your endpoint is mapped to /form/submit
-                data: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    selectedDate: selectedDate,
-                    reason: reason,
-                    pdfData: pdfData
-                },
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (xhr) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
-    </script>
+    <!-- Change the script source to use HTTP -->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 <!-- Add the title to the form -->
-<h1>MyForm from thymeleaf</h1>
+<h1>MyForm from Thymeleaf</h1>
 
-<!-- The form to get the input values -->
-    <form>
-        <label for="firstName">First Name:</label><br>
-        <input type="text" id="firstName" name="firstName" th:field="*{firstName}"><br>
+<form th:action="@{/submit}" method="post" onsubmit="return generateFormData(event)">
+    <label for="firstName">First Name:</label><br>
+    <input type="text" id="firstName" name="firstName" th:field="*{formData.firstName}"><br>
 
-        <label for="lastName">Last Name:</label><br>
-        <input type="text" id="lastName" name="lastName" th:field="*{lastName}"><br>
+    <label for="lastName">Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName" th:field="*{formData.lastName}"><br>
 
-        <label for="selectedDate">Select Date:</label><br>
-        <input type="date" id="selectedDate" name="selectedDate" th:field="*{selectedDate}"><br>
+    <label for="selectedDate">Select Date:</label><br>
+    <input type="date" id="selectedDate" name="selectedDate" th:field="*{formData.selectedDate}"><br>
 
-        <label for="reason">Reason:</label><br>
-        <textarea id="reason" name="reason" th:field="*{reason}"></textarea><br><br>
+    <label for="reason">Reason:</label><br>
+    <textarea id="reason" name="reason" th:field="*{formData.reason}"></textarea><br><br>
 
-        <input type="button" value="Generate PDF" onclick="generatePDF()">
-    </form>
+    <input type="submit" value="Generate Form Data">
+</form>
+
+<div id="messageDiv" style="display: none; color: green; margin-top: 10px;"></div>
+
+<script>
+    function generateFormData(event) {
+        event.preventDefault();
+
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var selectedDate = $("#selectedDate").val();
+        var reason = $("#reason").val();
+
+        if (!firstName || !lastName || !selectedDate || !reason) {
+            console.error("One or more form fields are empty. Please fill in all the fields.");
+            return false;
+        }
+
+        $("#messageDiv").text("Your form data was submitted successfully.");
+        $("#messageDiv").show();
+
+        console.log("Form data submitted:", {
+            firstName: firstName,
+            lastName: lastName,
+            selectedDate: selectedDate,
+            reason: reason
+        });
+
+        $.ajax({
+            type: "POST",
+            // Use HTTP for the URL
+            url: "https://frontend.mantalepersonal.com/submit",
+            data: {
+                firstName: firstName,
+                lastName: lastName,
+                selectedDate: selectedDate,
+                reason: reason
+            },
+            success: function(response) {
+                console.log("Form data submitted successfully:", response);
+                // Handle any further actions or update the UI as needed
+            },
+            error: function(error) {
+                console.error("Error submitting form data:", error);
+                // Handle errors or update the UI accordingly
+            }
+        });
+
+        // Return false to prevent the form from submitting via traditional HTML form submission
+        return false;
+    }
+</script>
 
 </body>
 </html>

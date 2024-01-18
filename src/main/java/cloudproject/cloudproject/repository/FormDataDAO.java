@@ -14,11 +14,11 @@ public interface FormDataDAO extends JpaRepository<FormData, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO form_data (first_name, last_name, pdf_bytes, reason, selected_date) \n" +
-            "VALUES (:first_name, :last_name, :pdf_bytes, :reason, :selected_date)", nativeQuery = true)
-    void saveFormDataWithPdf(@Param("first_name") String firstName,
+    @Query(value = "INSERT INTO form_data (first_name, last_name, reason, selected_date, approved) \n" +
+            "VALUES (:first_name, :last_name, :reason, :selected_date, false)", nativeQuery = true)
+    void saveFormData(@Param("first_name") String firstName,
                              @Param("last_name") String lastName,
-                             @Param("pdf_bytes") byte[] pdfBytes,
                              @Param("reason") String reason,
                              @Param("selected_date") LocalDate selectedDate);
 }
+

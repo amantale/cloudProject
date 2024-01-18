@@ -28,13 +28,10 @@ public class FormData {
     private LocalDate selectedDate;
     @Column(name = "reason")
     private String reason;
+    @Column(name = "approved")
+    private boolean approved;
 
-    // Add a field to store the PDF bytes
-    @Lob
-    @Column(name = "pdf_bytes")
-    private byte[] pdfBytes;
 
-    // Add getters and setters
     public Long getId() {
         return id;
     }
@@ -75,11 +72,23 @@ public class FormData {
         this.reason = reason;
     }
 
-    public byte[] getPdfBytes() {
-        return pdfBytes;
+    public boolean isApproved() {
+        return approved;
     }
 
-    public void setPdfBytes(byte[] pdfBytes) {
-        this.pdfBytes = pdfBytes;
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    @Override
+    public String toString() {
+        return "FormData{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", selectedDate=" + selectedDate +
+                ", reason='" + reason + '\'' +
+                ", approved=" + approved +
+                '}';
     }
 }
