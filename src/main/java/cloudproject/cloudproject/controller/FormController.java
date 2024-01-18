@@ -60,6 +60,19 @@ public class FormController {
         return "awaitingApproval";
     }
 
+    @PostMapping("/approveRequest")
+    public String approveRequest(@ModelAttribute FormData formData) {
+        try {
+            System.out.println("inside approveRequest");
+            formDataDAO.approveFormData(formData.getId());
+            System.out.println("inside approveRequest after approval");
+            return "redirect:/awaitingApproval";
+        } catch (Exception e) {
+            e.printStackTrace();  // Print the exception details for debugging
+            return "error";
+        }
+    }
+
     @GetMapping("/createRequest")
     public String showCreateRequest(Model model) {
         System.out.println("inside showCreateRequest");

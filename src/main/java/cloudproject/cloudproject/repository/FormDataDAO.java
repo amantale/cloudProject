@@ -23,5 +23,10 @@ public interface FormDataDAO extends JpaRepository<FormData, Long> {
                              @Param("selected_date") LocalDate selectedDate);
 
     List<FormData> findByApproved(boolean approved);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE FormData SET approved = true WHERE id = :id")
+    void approveFormData(@Param("id") Long id);
 }
 

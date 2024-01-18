@@ -8,25 +8,28 @@
     <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-<h1>Create a new request</h1>
+    <h1>Create a new request</h1>
+    <button onclick="location.href='/approvedRequests';">See approved requests</button>
+    <button onclick="location.href='/awaitingApproval';">See requests that await approval</button>
+    <button onclick="location.href='/createRequest';">Create a new request</button>
 
-<form th:action="@{/submit}" method="post" onsubmit="return generateFormData(event)">
-    <label for="firstName">First Name:</label><br>
-    <input type="text" id="firstName" name="firstName" th:field="*{formData.firstName}"><br>
+    <form th:action="@{/submit}" method="post" onsubmit="return generateFormData(event)">
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" th:field="*{formData.firstName}"><br>
 
-    <label for="lastName">Last Name:</label><br>
-    <input type="text" id="lastName" name="lastName" th:field="*{formData.lastName}"><br>
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName" th:field="*{formData.lastName}"><br>
 
-    <label for="selectedDate">Select Date:</label><br>
-    <input type="date" id="selectedDate" name="selectedDate" th:field="*{formData.selectedDate}"><br>
+        <label for="selectedDate">Select Date:</label><br>
+        <input type="date" id="selectedDate" name="selectedDate" th:field="*{formData.selectedDate}"><br>
 
-    <label for="reason">Reason:</label><br>
-    <textarea id="reason" name="reason" th:field="*{formData.reason}"></textarea><br><br>
+        <label for="reason">Reason:</label><br>
+        <textarea id="reason" name="reason" th:field="*{formData.reason}"></textarea><br><br>
 
-    <input type="submit" value="Generate Form Data">
-</form>
+        <input type="submit" value="Generate Form Data">
+    </form>
 
-<div id="messageDiv" style="display: none; color: green; margin-top: 10px;"></div>
+    <div id="messageDiv" style="display: none; color: green; margin-top: 10px;"></div>
 
 <script>
     function generateFormData(event) {
