@@ -2,6 +2,7 @@ package cloudproject.cloudproject.controller;
 
 import cloudproject.cloudproject.entity.FormData;
 import cloudproject.cloudproject.repository.FormDataDAO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,42 @@ public class FormController {
             e.printStackTrace();  // Print the exception details for debugging
             return "error";
         }
+    }
+
+    @GetMapping("/approvedRequests")
+    public String showApprovedRequests(Model model) {
+        System.out.println("inside showApprovedRequests");
+        List<FormData> approvedRequestsList = formDataDAO.findByApproved(true);
+        model.addAttribute("approvedRequests", approvedRequestsList);
+        return "approvedRequests";
+    }
+
+    @GetMapping("/awaitingApproval")
+    public String showAwaitingApproval(Model model) {
+        System.out.println("inside showAwaitingApproval");
+        List<FormData> awaitingApprovalList = formDataDAO.findByApproved(false);
+        model.addAttribute("awaitingApprovalList", awaitingApprovalList);
+        return "awaitingApproval";
+    }
+
+    @PostMapping("/approveRequest")
+    public String approveRequest(@ModelAttribute FormData formData) {
+        try {
+            System.out.println("inside approveRequest");
+            formDataDAO.approveFormData(formData.getId());
+            System.out.println("inside approveRequest after approval");
+            return "redirect:/awaitingApproval";
+        } catch (Exception e) {
+            e.printStackTrace();  // Print the exception details for debugging
+            return "error";
+        }
+    }
+
+    @GetMapping("/createRequest")
+    public String showCreateRequest(Model model) {
+        System.out.println("inside showCreateRequest");
+        model.addAttribute("formData", new FormData());
+        return "createRequest";
     }
 
 }

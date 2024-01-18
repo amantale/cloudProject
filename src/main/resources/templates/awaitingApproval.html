@@ -1,0 +1,34 @@
+<!-- awaitingApproval.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Awaiting Approval</title>
+</head>
+<body>
+    <h1>Hello from the requests that await approval</h1>
+    <button onclick="location.href='/approvedRequests';">See approved requests</button>
+    <button onclick="location.href='/awaitingApproval';">See requests that await approval</button>
+    <button onclick="location.href='/createRequest';">Create a new request</button>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Selected Date</th>
+            <th>Reason</th>
+        </tr>
+        <tr th:each="formData : ${awaitingApprovalList}">
+            <td th:text="${formData.firstName}"></td>
+            <td th:text="${formData.lastName}"></td>
+            <td th:text="${formData.selectedDate}"></td>
+            <td th:text="${formData.reason}"></td>
+            <td>
+                <form th:action="@{/approveRequest}" method="post">
+                    <input type="hidden" name="id" th:value="${formData.id}">
+                    <button type="submit">Approve Request</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -3,6 +3,7 @@ package cloudproject.cloudproject.repository;
 import cloudproject.cloudproject.entity.FormData;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,5 +21,12 @@ public interface FormDataDAO extends JpaRepository<FormData, Long> {
                              @Param("last_name") String lastName,
                              @Param("reason") String reason,
                              @Param("selected_date") LocalDate selectedDate);
+
+    List<FormData> findByApproved(boolean approved);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE FormData SET approved = true WHERE id = :id")
+    void approveFormData(@Param("id") Long id);
 }
 
