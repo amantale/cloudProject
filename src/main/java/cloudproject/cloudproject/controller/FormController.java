@@ -12,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/form")
+@Controller
+@RequestMapping(path = "")
 public class FormController {
 
     @Autowired
@@ -31,8 +33,14 @@ public class FormController {
     }
 
     @GetMapping("/")
-    public String index() {
-        return "index.html";
+    public String displayForm(Model model) {
+        // Add model attributes for the form fields
+        model.addAttribute("firstName", "");  // Set default or retrieve from database
+        model.addAttribute("lastName", "");   // Set default or retrieve from database
+        model.addAttribute("selectedDate", ""); // Set default or retrieve from database
+        model.addAttribute("reason", "");     // Set default or retrieve from database
+
+        return "index";
     }
 
     @PostMapping(value = "/submit", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)

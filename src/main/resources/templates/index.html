@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Generate PDF from Form Data</title>
@@ -35,7 +35,7 @@
             // Send the PDF data to the API via an AJAX POST request
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:8080/form/submit',
+                url: '/submit', // Assuming your endpoint is mapped to /form/submit
                 data: {
                     firstName: firstName,
                     lastName: lastName,
@@ -43,10 +43,10 @@
                     reason: reason,
                     pdfData: pdfData
                 },
-                success: function(response) {
+                success: function (response) {
                     console.log(response);
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     console.error(xhr.responseText);
                 }
             });
@@ -55,23 +55,24 @@
 </head>
 <body>
 <!-- Add the title to the form -->
-<h1>MyForm</h1>
+<h1>MyForm from thymeleaf</h1>
 
 <!-- The form to get the input values -->
-<form>
-    <label for="firstName">First Name:</label><br>
-    <input type="text" id="firstName" name="firstName"><br>
+    <form>
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" th:field="*{firstName}"><br>
 
-    <label for="lastName">Last Name:</label><br>
-    <input type="text" id="lastName" name="lastName"><br>
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName" th:field="*{lastName}"><br>
 
-    <label for="selectedDate">Select Date:</label><br>
-    <input type="date" id="selectedDate" name="selectedDate"><br>
+        <label for="selectedDate">Select Date:</label><br>
+        <input type="date" id="selectedDate" name="selectedDate" th:field="*{selectedDate}"><br>
 
-    <label for="reason">Reason:</label><br>
-    <textarea id="reason" name="reason"></textarea><br><br>
+        <label for="reason">Reason:</label><br>
+        <textarea id="reason" name="reason" th:field="*{reason}"></textarea><br><br>
 
-    <input type="button" value="Generate PDF" onclick="generatePDF()">
-</form>
+        <input type="button" value="Generate PDF" onclick="generatePDF()">
+    </form>
+
 </body>
 </html>
