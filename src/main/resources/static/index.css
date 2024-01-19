@@ -33,11 +33,13 @@ button:hover {
 
 .grid-item {
     background-color: #DCF2F1;
-    padding: 10px; /* Adjusted padding */
-    font-size: 13px; /* Adjusted font size */
+    padding: 10px;
+    font-size: 13px;
     text-align: center;
-    width: 70%;
+    width: 60%; /* Adjusted width */
     align-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .grid-item img {
