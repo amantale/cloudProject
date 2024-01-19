@@ -5,11 +5,51 @@
     <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Generate PDF from Form Data</title>
     <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-rLYzH/cG2PPtRbUNwu2SR1oZlmAwLOHE06n0ifnGW2Gf0IZszrPalT0IevPfQQRtScmL2k/GFQUe2t/AJrUEfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link th:href="@{/index.css}" rel="stylesheet"/>
 </head>
 <body>
-    <h1>Hello from landing page</h1>
-    <button onclick="location.href='/approvedRequests';">See approved requests</button>
-    <button onclick="location.href='/awaitingApproval';">See requests that await approval</button>
-    <button onclick="location.href='/createRequest';">Create a new request</button>
+<h1>Hello from landing page</h1>
+<button onclick="location.href='/';">Home</button>
+<button onclick="location.href='/approvedRequests';">See approved requests</button>
+<button onclick="location.href='/awaitingApproval';">See requests that await approval</button>
+<button onclick="location.href='/createRequest';">Create a new request</button>
+
+<div class="grid-container">
+    <div class="grid-item">
+        <h3>Mantale Antonio-Roberto</h3>
+        <a href="https://www.linkedin.com/in/mantale-antonio-roberto/">
+            <i class="fa fa-linkedin-square"></i> Linkedin profile
+        </a>
+    </div>
+    <div class="grid-item">
+        <h3>Rusu Justinian</h3>
+        <a href="https://www.linkedin.com/in/justinian-rusu-686b13206/">
+            <i class="fa fa-linkedin-square"></i> Linkedin profile
+        </a>
+    </div>
+    <div class="grid-item">
+        <h3>Ciobanu Lorena-Georgiana</h3>
+        <a href="https://www.linkedin.com/in/lorena-georgiana-ciobanu-656997200/">
+            <i class="fa fa-linkedin-square"></i> Linkedin profile
+        </a>
+    </div>
+    <div class="grid-item">
+        <a href="https://github.com/manTTale">
+            <i class="fa fa-github"></i> Github profile
+        </a>
+    </div>
+    <div class="grid-item">
+        <a href="https://github.com/JustinRusu20">
+            <i class="fa fa-github"></i> Github profile
+        </a>
+    </div>
+    <div class="grid-item">
+        <a href="https://github.com/CiobanuLorenaG">
+            <i class="fa fa-github"></i> Github profile
+        </a>
+    </div>
+</div>
 </body>
 </html>

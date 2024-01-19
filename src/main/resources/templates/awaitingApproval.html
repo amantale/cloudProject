@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Awaiting Approval</title>
+    <link th:href="@{/awaitingApproval.css}" rel="stylesheet" />
 </head>
 <body>
     <h1>Hello from the requests that await approval</h1>
+    <button onclick="location.href='/';">Home</button>
     <button onclick="location.href='/approvedRequests';">See approved requests</button>
     <button onclick="location.href='/awaitingApproval';">See requests that await approval</button>
     <button onclick="location.href='/createRequest';">Create a new request</button>

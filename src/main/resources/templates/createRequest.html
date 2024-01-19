@@ -4,27 +4,36 @@
 <head>
     <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Generate PDF from Form Data</title>
-    <!-- Change the script source to use HTTP -->
     <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link th:href="@{/createRequest.css}" rel="stylesheet" />
 </head>
 <body>
     <h1>Create a new request</h1>
+    <button onclick="location.href='/';">Home</button>
     <button onclick="location.href='/approvedRequests';">See approved requests</button>
     <button onclick="location.href='/awaitingApproval';">See requests that await approval</button>
     <button onclick="location.href='/createRequest';">Create a new request</button>
 
     <form th:action="@{/submit}" method="post" onsubmit="return generateFormData(event)">
-        <label for="firstName">First Name:</label><br>
-        <input type="text" id="firstName" name="firstName" th:field="*{formData.firstName}"><br>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" th:field="*{formData.firstName}">
+        <br>
+        <br>
 
-        <label for="lastName">Last Name:</label><br>
-        <input type="text" id="lastName" name="lastName" th:field="*{formData.lastName}"><br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" th:field="*{formData.lastName}">
+        <br>
+        <br>
 
-        <label for="selectedDate">Select Date:</label><br>
-        <input type="date" id="selectedDate" name="selectedDate" th:field="*{formData.selectedDate}"><br>
+        <label for="selectedDate">Select Date:</label>
+        <input type="date" id="selectedDate" name="selectedDate" th:field="*{formData.selectedDate}">
+        <br>
+        <br>
 
-        <label for="reason">Reason:</label><br>
-        <textarea id="reason" name="reason" th:field="*{formData.reason}"></textarea><br><br>
+        <label for="reason">Reason:</label>
+        <textarea id="reason" name="reason" th:field="*{formData.reason}"></textarea>
+        <br>
+        <br>
 
         <input type="submit" value="Generate Form Data">
     </form>
