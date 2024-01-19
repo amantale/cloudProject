@@ -18,8 +18,6 @@ public class FormData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // Add fields to store form data
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
