@@ -50,6 +50,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-weight: bold;
 }
 
 th {
@@ -65,4 +66,3 @@ form {
     text-align: center;
     margin-top: 20px;
 }
-
