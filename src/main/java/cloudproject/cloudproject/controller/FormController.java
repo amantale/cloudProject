@@ -39,7 +39,7 @@ public class FormController {
             System.out.println("inside saveForm after save");
             return "redirect:/";
         } catch (Exception e) {
-            e.printStackTrace();  // Print the exception details for debugging
+            e.printStackTrace();
             return "error";
         }
     }
