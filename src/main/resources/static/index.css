@@ -6,9 +6,26 @@ body {
     margin-top: 50px;
 }
 
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.header-container img:first-child {
+    order: -1;
+}
+
+.header-container img {
+    width: 300px;
+    height: 120px;
+}
+
 h1 {
     color: #333;
 }
+
 
 button {
     background-color: #4CAF50;
@@ -36,13 +53,13 @@ button:hover {
     padding: 10px;
     font-size: 13px;
     text-align: center;
-    width: 60%; /* Adjusted width */
+    width: 60%;
     align-content: center;
     margin-left: auto;
     margin-right: auto;
 }
 
-.grid-item img {
+.grid-item {
     max-width: 40%;
     height: auto;
 }
