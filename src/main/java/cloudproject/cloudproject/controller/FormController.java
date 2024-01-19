@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@CrossOrigin(origins = "https://frontend.mantalepersonal.com")
+//@CrossOrigin(origins = "https://frontend.mantalepersonal.com")
 @RequestMapping(path = "")
 public class FormController {
 
